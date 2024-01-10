@@ -1,0 +1,8 @@
+.header-button {
+  @apply border-b-4 border-transparent;
+}
+
+.header-button:hover,
+.header-button.active {
+  @apply border-b-4 border-neutral-200;
+}

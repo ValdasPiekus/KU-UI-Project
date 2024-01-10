@@ -1,0 +1,203 @@
+<app-header-layout [headerItems]="headerItems">
+  <div class="h-[21.5rem] pt-5 px-5 overflow-y-auto">
+    <div *ngIf="registrations != null && registrations.length > 0; else noRegistrations">
+      <div *ngFor="let registration of registrations; let i = index" class="registration-list">
+        <div *ngIf="!editIndex[i]" class="registration-display">
+          <div>
+            <div class="field-label">Vardas:</div>
+            <div class="flex">
+              <div class="mr-1">{{ registration.firstName }}</div>
+              <div>{{ registration.lastName }}</div>
+            </div>
+            <div class="flex mt-2">
+              <div class="mr-5">
+                <div class="field-label">Gimimo Metai:</div>
+                <div class="field">{{ registration.birthYear }}</div>
+              </div>
+              <div class="mr-5">
+                <div class="field-label">Lytis:</div>
+                <div class="field">{{ getGenderLabelByKey(registration.gender) }}</div>
+              </div>
+              <div>
+                <div class="field-label">El.paštas:</div>
+                <div class="field">{{ registration.email }}</div>
+              </div>
+            </div>
+            <div class="flex mt-2">
+              <div class="mr-5">
+                <div class="field-label">Telefonas:</div>
+                <div class="field">{{ registration.phone }}</div>
+              </div>
+              <div>
+                <div class="field-label">Klasė:</div>
+                <div class="field">{{ registration.grade }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="ml-auto">
+            <button class="mr-3" (click)="setIsEdit(i, registration.id)">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button (click)="deleteRegistration(registration.id)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="editIndex[i]" class="registration-edit-form">
+          <form [formGroup]="forms[i]" (ngSubmit)="saveRegistration(i, registration.id)">
+            <div class="flex">
+              <div>
+                <div class="title">Vardas</div>
+                <input
+                  type="text"
+                  formControlName="firstName"
+                  class="input"
+                  placeholder="Įveskite vardą"
+                />
+                <div
+                  *ngIf="forms[i].controls['firstName'].errors && (forms[i].controls['firstName'].dirty || forms[i].controls['firstName'].touched)"
+                  class="mt-1"
+                >
+                  <div *ngIf="forms[i].controls['firstName'].errors?.['required']" class="error">
+                    Vardas yra privalomas.
+                  </div>
+                  <div *ngIf="forms[i].controls['firstName'].errors?.['minlength']" class="error">
+                    Vardas turi būti ne trumpesnis nei 3 simboliai.
+                  </div>
+                  <div *ngIf="forms[i].controls['firstName'].errors?.['maxlength']" class="error">
+                    Vardas turi būti ne ilgesnis nei 15 simbolių.
+                  </div>
+                </div>
+              </div>
+              <div class="ml-9">
+                <div class="title">Pavardė</div>
+                <input
+                  type="text"
+                  formControlName="lastName"
+                  class="input"
+                  placeholder="Įveskite pavardę"
+                />
+                <div
+                  *ngIf="forms[i].controls['lastName'].errors && (forms[i].controls['lastName'].dirty || forms[i].controls['lastName'].touched)"
+                  class="mt-1"
+                >
+                  <div *ngIf="forms[i].controls['lastName'].errors?.['required']" class="error">
+                    Pavardė yra privaloma.
+                  </div>
+                  <div *ngIf="forms[i].controls['lastName'].errors?.['minlength']" class="error">
+                    Pavardė turi būti ne trumpesnis nei 3 simboliai.
+                  </div>
+                  <div *ngIf="forms[i].controls['lastName'].errors?.['maxlength']" class="error">
+                    Pavardė turi būti ne ilgesnis nei 15 simbolių.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex mt-2">
+              <div>
+                <div class="title">Gimimo Metai</div>
+                <input
+                  type="number"
+                  formControlName="birthYear"
+                  class="input"
+                  placeholder="Įveskite tik metus"
+                />
+                <div
+                  *ngIf="forms[i].controls['birthYear'].errors && (forms[i].controls['birthYear'].dirty || forms[i].controls['birthYear'].touched)"
+                  class="mt-1"
+                >
+                  <div *ngIf="forms[i].controls['birthYear'].errors?.['required']" class="error">
+                    Gimimo metai yra privalomi.
+                  </div>
+                  <div *ngIf="forms[i].controls['birthYear'].errors?.['pattern']" class="error">
+                    Gimimo metia turi būti iš 4 skaitmenų.
+                  </div>
+                  <div
+                    *ngIf="forms[i].controls['birthYear'].errors?.['invalidBirthYear']"
+                    class="error"
+                  >
+                    Gimimo metai turi būti ne didesni nei {{ currentYear - 5 }}.
+                  </div>
+                </div>
+              </div>
+              <div class="ml-9">
+                <div class="title mb-1">Lytis</div>
+                <div *ngFor="let option of genderOptions" class="leading-[0.5rem]">
+                  <input
+                    type="radio"
+                    formControlName="gender"
+                    [value]="getGenderKey(option)"
+                    [id]="getGenderKey(option)"
+                  />
+                  <label class="radio-option" [for]="getGenderKey(option)"
+                    >{{ getGenderValue(option) }}</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="flex mt-2">
+              <div>
+                <div class="title">El. Paštas</div>
+                <input
+                  type="email"
+                  formControlName="email"
+                  class="input"
+                  placeholder="Įveskite el. paštą"
+                />
+                <div
+                  *ngIf="forms[i].controls['email'].errors && (forms[i].controls['email'].dirty || forms[i].controls['email'].touched)"
+                  class="mt-1"
+                >
+                  <div *ngIf="forms[i].controls['email'].errors?.['required']" class="error">
+                    El. paštas yra privalomas.
+                  </div>
+                  <div *ngIf="forms[i].controls['email'].errors?.['email']" class="error">
+                    Neteisingas el. pašto formatas.
+                  </div>
+                </div>
+              </div>
+              <div class="ml-9">
+                <div class="title">Telefonas</div>
+                <input
+                  type="tel"
+                  formControlName="phone"
+                  class="input"
+                  placeholder="+37012345678"
+                />
+                <div
+                  *ngIf="forms[i].controls['phone'].errors && (forms[i].controls['phone'].dirty || forms[i].controls['phone'].touched)"
+                  class="mt-1"
+                >
+                  <div *ngIf="forms[i].controls['phone'].errors?.['required']" class="error">
+                    Telefonas yra privalomas.
+                  </div>
+                  <div
+                    *ngIf="forms[i].controls['phone'].errors?.['invalidPhoneNumber']"
+                    class="error"
+                  >
+                    Telefono formatas privalo būti +37012345678.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="title">Klasė</div>
+              <select #gradeSelect formControlName="grade" class="input w-32">
+                <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
+              </select>
+            </div>
+            <button class="submit-button" type="submit" [disabled]="forms[i].invalid">
+              Išsaugoti
+            </button>
+            <button class="cancel-button ml-5" type="button" (click)="cancelEdit(i)">
+              Atšaukti
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <ng-template #noRegistrations>
+      <div class="no-registrations">Registracijų nėra</div>
+    </ng-template>
+  </div>
+</app-header-layout>

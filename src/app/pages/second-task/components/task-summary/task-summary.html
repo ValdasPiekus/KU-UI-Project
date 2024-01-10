@@ -1,0 +1,5 @@
+<div *ngIf="summaryItems.length > 0" class="task-summary">
+  <div *ngFor="let summaryItem of summaryItems" class="flex-1">
+    {{ summaryItem.priority }}: {{ summaryItem.sum }}
+  </div>
+</div>

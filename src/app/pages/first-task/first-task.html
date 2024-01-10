@@ -1,0 +1,55 @@
+<div class="w-[26rem] h-96 bg-neutral-200">
+  <div class="h-full w-full pt-10 pl-5">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="flex pb-5">
+        <div class="pr-5">
+          <div class="title">{{inputs['volume'].title}}</div>
+          <div class="flex">
+            <input
+              formControlName="volume"
+              [class]="'input ' + inputs['volume'].class"
+              type="number"
+              min="0"
+              placeholder="0"
+              id="volume"
+            />
+            <div class="unit">{{inputs['volume'].unit}}</div>
+          </div>
+        </div>
+        <div class="pr-5">
+          <div class="title">{{inputs['fillingSpeed'].title}}</div>
+          <div class="flex">
+            <input
+              formControlName="fillingSpeed"
+              [class]="'input ' + inputs['fillingSpeed'].class"
+              type="number"
+              min="0"
+              placeholder="0"
+              id="fillingSpeed"
+            />
+            <div class="unit">{{inputs['fillingSpeed'].unit}}</div>
+          </div>
+        </div>
+        <div class="pr-5">
+          <div class="title">{{inputs['duration'].title}}</div>
+          <div class="flex">
+            <input
+              formControlName="duration"
+              [class]="'input ' + inputs['duration'].class"
+              type="number"
+              min="0"
+              placeholder="0"
+              id="duration"
+            />
+            <div class="unit">{{inputs['duration'].unit}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <button class="submit-button" type="submit" [disabled]="form.invalid">Skaičiuoti</button>
+        <span *ngIf="result" class="result"> Užpildyta: {{result}}% </span>
+      </div>
+    </form>
+    <app-info-message *ngIf="infoMessage" [infoMessages]="infoMessages" [type]="infoMessage" />
+  </div>
+</div>

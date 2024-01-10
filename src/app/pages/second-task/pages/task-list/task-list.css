@@ -1,0 +1,24 @@
+.task-list {
+  @apply bg-neutral-300 mb-3 py-1 pl-2 pr-3 font-medium text-sm rounded-sm shadow-sm;
+}
+
+.task-display {
+  @apply flex items-center;
+}
+
+.task-edit-form {
+  @apply py-1;
+}
+
+.title {
+  @apply font-medium text-xs pb-0.5 text-neutral-600;
+}
+
+.input {
+  @apply rounded-sm h-6 font-medium text-xs pl-1;
+}
+
+.submit-button {
+  @apply bg-neutral-600 mt-6 py-1 px-3 font-medium text-sm rounded-sm text-white shadow-sm;
+  @apply disabled:bg-neutral-500;
+}

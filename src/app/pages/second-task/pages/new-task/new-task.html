@@ -1,0 +1,38 @@
+<app-header-layout [headerItems]="headerItems">
+  <div class="mx-5 mt-5 h-max py-2 pl-3 bg-neutral-300 mb-3 rounded-sm shadow-sm">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="pr-5">
+        <div class="title">{{inputs['task'].title}}</div>
+        <div class="flex">
+          <textarea
+            formControlName="task"
+            [class]="'input pt-1 ' + inputs['task'].class"
+            type="textarea"
+            placeholder="Įveskite užduotį"
+            id="task"
+          ></textarea>
+        </div>
+      </div>
+      <div class="pr-5 mt-2">
+        <div class="title">{{inputs['priority'].title}}</div>
+        <div class="flex">
+          <select
+            #prioritySelect
+            formControlName="priority"
+            class="input default-selection"
+            (change)="onPriorityChange($event)"
+          >
+            <option value="" disabled selected>Tipas</option>
+            <option *ngFor="let priority of priorities" [value]="getKey(priority)">
+              {{ getValue(priority) }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <button class="submit-button" type="submit" [disabled]="form.invalid">Sukurti</button>
+    </form>
+    <div class="mt-4">
+      <app-info-message *ngIf="infoMessage" [infoMessages]="infoMessages" [type]="infoMessage" />
+    </div>
+  </div>
+</app-header-layout>

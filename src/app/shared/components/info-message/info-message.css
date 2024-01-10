@@ -1,0 +1,15 @@
+.info-message {
+  @apply font-medium text-xs rounded-sm py-1 px-2 w-fit;
+}
+
+.warning {
+  @apply bg-neutral-400;
+}
+
+.error {
+  @apply bg-red-400;
+}
+
+.success {
+  @apply bg-green-400;
+}

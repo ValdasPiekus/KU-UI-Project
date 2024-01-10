@@ -1,0 +1,57 @@
+<app-header-layout [headerItems]="headerItems">
+  <div class="h-[21.5rem] pt-5 px-5 overflow-y-auto">
+    <app-task-summary [summaryItems]="summaryItems"></app-task-summary>
+    <div *ngIf="tasks != null && tasks.length > 0">
+      <div *ngFor="let task of tasks; let i = index" class="task-list">
+        <div *ngIf="!editIndex[i]" class="task-display">
+          <div class="flex-grow">
+            <div class="mb-1">{{ task.task }}</div>
+            <div class="text-xs">Tipas: {{ getPriorityLabelByKey(task.priority) }}</div>
+          </div>
+          <div class="ml-auto">
+            <button class="mr-3" (click)="editTask(i)">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button (click)="deleteTask(i)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="editIndex[i]" class="task-edit-form">
+          <form [formGroup]="forms[i]" (ngSubmit)="onSubmit(i)">
+            <div class="pr-5">
+              <div class="title">{{inputs['task'].title}}</div>
+              <div class="flex">
+                <textarea
+                  formControlName="task"
+                  [class]="'input pt-1 ' + inputs['task'].class"
+                  type="textarea"
+                  placeholder="Įveskite užduotį"
+                  id="task"
+                ></textarea>
+              </div>
+            </div>
+            <div class="pr-5 mt-2">
+              <div class="title">{{inputs['priority'].title}}</div>
+              <div class="flex">
+                <select
+                  #prioritySelect
+                  formControlName="priority"
+                  class="input default-selection"
+                  (change)="onPriorityChange($event)"
+                >
+                  <option *ngFor="let priority of priorities" [value]="getKey(priority)">
+                    {{ getValue(priority) }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <button class="submit-button" type="submit" [disabled]="forms[i].invalid">
+              Išsaugoti
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-header-layout>

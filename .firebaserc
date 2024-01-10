@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ui-project-db-9a2c4": {
+      "hosting": {
+        "ui-project": [
+          "ui-project-db-9a2c4"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ui-project-db-9a2c4"
+  }
+}

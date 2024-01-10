@@ -1,0 +1,7 @@
+.tab {
+  @apply font-medium text-xs pl-3 py-0.5 my-2 h-6 pt-1 hover:bg-neutral-200 hover:shadow;
+}
+
+.selected-tab {
+  @apply border-r-4 border-neutral-400 bg-neutral-200 shadow;
+}

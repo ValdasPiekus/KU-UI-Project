@@ -1,0 +1,20 @@
+.title {
+  @apply font-medium text-xs pb-0.5 text-neutral-600;
+}
+
+.unit {
+  @apply font-medium text-xs bg-neutral-300 h-6 rounded-sm w-fit px-1.5 pt-1 text-neutral-600;
+}
+
+.input {
+  @apply rounded-sm h-6 font-medium text-xs pl-1;
+}
+
+.submit-button {
+  @apply bg-neutral-600 py-1 px-3 font-medium text-sm rounded-sm text-white shadow-sm;
+  @apply disabled:bg-neutral-500;
+}
+
+.result {
+  @apply font-medium text-sm mt-3 pl-3;
+}

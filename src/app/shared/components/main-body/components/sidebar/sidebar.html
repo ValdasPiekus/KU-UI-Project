@@ -1,0 +1,9 @@
+<div class="sidebar">
+  <app-tab
+    *ngFor="let tab of tabService.getTabs()"
+    [isSelected]="isSelected(tab.key)"
+    (click)="selectTab(tab.key)"
+  >
+    {{tab.value}}
+  </app-tab>
+</div>

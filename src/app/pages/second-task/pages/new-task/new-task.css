@@ -1,0 +1,16 @@
+.title {
+  @apply font-medium text-xs pb-0.5 text-neutral-600;
+}
+
+.input {
+  @apply rounded-sm h-6 font-medium text-xs pl-1;
+}
+
+.submit-button {
+  @apply bg-neutral-600 mt-6 py-1 px-3 font-medium text-sm rounded-sm text-white shadow-sm;
+  @apply disabled:bg-neutral-500;
+}
+
+select:is(.default-selection) {
+  @apply text-neutral-400;
+}

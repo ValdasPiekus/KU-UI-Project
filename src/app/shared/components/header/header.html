@@ -1,0 +1,10 @@
+<div class="h-10 bg-neutral-600 flex pl-3 pt-2">
+  <button
+    *ngFor="let headerItem of headerItems"
+    class="header-button font-medium text-xs text-neutral-200 mr-3 h-6"
+    [class.active]="isRouteActive(headerItem.route)"
+    (click)="navigateToRoute(headerItem.route)"
+  >
+    {{headerItem.label}}
+  </button>
+</div>

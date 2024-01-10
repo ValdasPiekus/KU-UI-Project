@@ -1,0 +1,52 @@
+.registration-list {
+  @apply bg-neutral-300 mb-3 py-1 pl-2 pr-3 font-medium text-sm rounded-sm shadow-sm;
+}
+
+.registration-display {
+  @apply flex items-center;
+}
+
+.registration-edit-form {
+  @apply py-1;
+}
+
+.field-label {
+  @apply font-medium leading-3 text-[14px];
+}
+
+.field {
+  @apply font-medium text-[17px];
+}
+
+.title {
+  @apply font-medium text-xs pb-0.5 text-neutral-600;
+}
+
+.input {
+  @apply rounded-sm h-6 font-medium text-xs pl-1;
+}
+
+.radio-option {
+  @apply pl-1 font-medium text-xs;
+}
+
+.error {
+  @apply font-medium leading-3 text-[13px] text-red-600 w-32;
+}
+
+select:is(.default-selection) {
+  @apply text-neutral-400;
+}
+
+.submit-button {
+  @apply bg-neutral-600 mt-6 py-1 px-3 font-medium text-sm rounded-sm text-white shadow-sm;
+  @apply disabled:bg-neutral-500;
+}
+
+.cancel-button {
+  @apply bg-neutral-100 mt-6 py-1 px-3 font-medium text-sm rounded-sm text-neutral-600 shadow-sm border-neutral-600 border-2;
+}
+
+.no-registrations {
+  @apply font-medium text-base;
+}

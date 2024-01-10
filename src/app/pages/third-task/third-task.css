@@ -1,0 +1,50 @@
+.submit-button {
+  @apply bg-neutral-600 py-1 px-3 font-medium text-sm rounded-sm text-white shadow-sm;
+  @apply disabled:bg-neutral-500;
+}
+
+.result {
+  @apply font-medium text-sm pl-3;
+}
+
+.title {
+  @apply font-medium text-xs pb-0.5 text-neutral-600;
+}
+
+.input {
+  @apply rounded-sm h-6 font-medium text-xs pl-1;
+}
+
+select:is(.default-selection) {
+  @apply text-neutral-400;
+}
+
+.error-message {
+  @apply font-medium text-xs rounded-sm py-1 px-2 w-fit bg-red-400;
+}
+
+.button-container {
+  @apply flex items-center;
+}
+
+.loading-container {
+  @apply inline-block ml-5;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
